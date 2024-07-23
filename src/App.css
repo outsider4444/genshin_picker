@@ -6,7 +6,19 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.header{
+  display: grid;
+  width: 100%;
+  grid-template-rows: 0.05fr 0.05fr 0.05fr;
+  grid-template-columns: 1fr 0.8fr 1fr;
+}
+.player{
+  width: 850px;
+  text-align: left;
+}
+.player1{
+  text-align: right;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -15,11 +27,8 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
