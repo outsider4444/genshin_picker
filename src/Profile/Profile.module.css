@@ -1,0 +1,22 @@
+.profile{
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+}
+
+.changeBtn {
+    width: 300px;
+    margin-top: 20px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #4CAF50, #00CCFF);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.changeBtn:hover {
+    background: linear-gradient(90deg, #00CCFF, #4CAF50);
+    transform: scale(1.05);
+}

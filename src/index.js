@@ -4,15 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Profile from "./Profile/Profile";
+import Login from "./Auth/Login";
+import Register from "./Auth/Register";
+import Auth from "./Auth/Auth";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path={"/"} element={<App/>} />
-        <Route path={"/profile"} element={<Profile/>} />
+        <Route path={"*"} element={<App/>} />
+        <Route path={"/Auth"} element={<Auth/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
