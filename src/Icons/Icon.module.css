@@ -8,9 +8,13 @@
 }
 .constIncreaseBtn{
     float: left;
+    margin-left: -15px;
+    margin-top: -5px;
     color: white;
     background-color: orange;
-    border-radius: 20%;
+    border-radius: 40%;
+    font-size: 13pt;
+    font-weight: bolder;
     border: none
 }
 .constIncreaseBtn:hover{
