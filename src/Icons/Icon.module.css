@@ -3,6 +3,16 @@
     justify-content: center;
     margin-right: 10px;
 }
-.roundIcon:hover{
+.roundIcon:hover img{
+    cursor: pointer;
+}
+.constIncreaseBtn{
+    float: left;
+    color: white;
+    background-color: orange;
+    border-radius: 20%;
+    border: none
+}
+.constIncreaseBtn:hover{
     cursor: pointer;
 }

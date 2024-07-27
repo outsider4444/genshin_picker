@@ -11,14 +11,15 @@ import Auth from "./Auth/Auth";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path={"*"} element={<App/>} />
-        <Route path={"/Auth"} element={<Auth/>} />
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+    <React.StrictMode>
+        <BrowserRouter>
+            <Routes>
+                <Route path={"/Login"} element={<Login/>}/>
+                <Route path={"/Register"} element={<Register/>}/>
+                <Route path={"*"} element={<App/>}/>
+            </Routes>
+        </BrowserRouter>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

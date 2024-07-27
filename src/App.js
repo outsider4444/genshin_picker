@@ -14,28 +14,31 @@ import {getToken, isTokenExpired, removeToken} from "./Jwt/auth";
 
 function App() {
     const [userInfo, setUserInfo] = useState(null);
+    const [userCharactersList, setUserCharactersList] = useState([]);
     const [error, setError] = useState(null);
     let navigate = useNavigate();
 
     useEffect(() => {
+
         const token = getToken();
         if (token && isTokenExpired(token)) {
             removeToken();
             navigate('/Auth/Login');
         }
+
         if (token) {
             axios.get('http://localhost:8080/api/v1/user', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            })
-                .then(response => {
-                    setUserInfo(response.data);
-                })
-                .catch(error => {
-                    setError(error);
-                });
-        } else {
+            }).then(response => {
+                setUserInfo(response.data);
+                setUserCharactersList(response.data.userCharacters);
+            }).catch(error => {
+                setError(error);
+            });
+        }
+        else {
             setError('No token found');
         }
     }, []);
@@ -43,8 +46,12 @@ function App() {
     return (
         <div className="App">
             <Routes>
-                <Route path={"*"} element={<Picks/>}/>
-                <Route path={"Profile"} element={<Profile userInfo={userInfo} setUserInfo={setUserInfo}/>}/>
+                <Route path={"/*"} element={<Picks/>}/>
+                <Route path={"/Profile"}
+                       element={<Profile token={getToken()} userInfo={userInfo}
+                                         setUserInfo={setUserInfo}
+                                         userCharactersList={userCharactersList}
+                                         setUserCharactersList={setUserCharactersList}/>}/>
             </Routes>
         </div>
     );

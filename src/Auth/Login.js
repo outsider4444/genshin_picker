@@ -1,14 +1,10 @@
 import React, {useState} from 'react';
 import styles from './Login.module.css';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
     let navigate = useNavigate();
-    const routeChange = () => {
-        let path = `/Register`;
-        navigate(path);
-    }
 
     const [formData, setFormData] = useState({
         email: '',
@@ -27,6 +23,7 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:8080/api/v1/auth/authenticate', formData);
             localStorage.setItem('AccessToken', response.data.token)
+            console.log('AccessToken', response.data.token)
             navigate("/")
         } catch (error) {
             console.error('Error authenticating user:', error.response);
@@ -57,9 +54,9 @@ const Login = () => {
                             alignItems: "center"
                         }}>
                             <label htmlFor="registerBtn">Нет аккаунта?</label>
-                            <button className={styles.registerButton} id={"registerBtn"}
-                                    onClick={routeChange}>Регистрация
-                            </button>
+                            <Link className={styles.registerButton} id={"registerBtn"}
+                                    to={"/Register"}>Регистрация
+                            </Link>
                         </div>
                     </form>
                 </div>

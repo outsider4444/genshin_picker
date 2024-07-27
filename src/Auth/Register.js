@@ -1,14 +1,10 @@
 import React, {useState} from 'react';
 import styles from "./Login.module.css";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
     let navigate = useNavigate();
-    const routeChange = () =>{
-        let path = `/Login`;
-        navigate(path);
-    }
 
     const [formData, setFormData] = useState({
         username: '',
@@ -59,7 +55,7 @@ const Register = () => {
                         <button type="submit" className={styles.loginButton}>Зарегистрироваться</button>
                         <div style={{display:"flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
                             <label htmlFor="authBtn">Уже есть аккаунт?</label> <br/>
-                            <button className={styles.registerButton} id={"authBtn"} onClick={routeChange}>Авторизация</button>
+                            <Link to={"/Login"} className={styles.registerButton} id={"authBtn"}>Авторизация</Link>
                         </div>
                     </form>
                 </div>

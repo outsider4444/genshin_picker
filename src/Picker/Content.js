@@ -16,19 +16,19 @@ const Content = ({Pick, ImmunePick, characters1, characters2, immuneCharacters
 
     return (
         <div style={{width: "100%"}}>
-            <div style={{width: "100%", display: "flex"}}>
-                <div style={{margin: "30px 30px", width: "800px", float: "left"}}>
+            <div style={{width: "100%", display: "flex", columnGap: "150px"}}>
+                <div style={{margin: "30px 30px", width: "50%", float: "left"}}>
                     {listItems1}
                 </div>
-                <div style={{margin: "30px 30px 0 275px", width: "800px", float: "right"}}>
+                <div style={{margin: "30px 30px 0 0", width: "50%", float: "right"}}>
                     {listItems2}
                 </div>
             </div>
-            <div style={{textAlign: "center", width: "100%", marginLeft:"920px", display: "flex" }}>
-                <div>
+            <div style={{textAlign: "center", width: "100%", display: "block", justifyItems: "center", alignItems: "center"}}>
                     <strong>Беннет</strong> <br/>
-                    {listImmune}
-                </div>
+                    <div style={{textAlign: "center", width: "100%", display: "block", justifyItems: "center", alignItems: "center"}}>
+                        {listImmune}
+                    </div>
             </div>
         </div>
     );

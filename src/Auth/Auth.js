@@ -5,12 +5,10 @@ import Register from "./Register";
 
 const Auth = () => {
     return (
-        <div>
-          <Routes>
-              <Route path={"Login"} element={<Login/>}/>
-              <Route path={"Register"} element={<Register/>}/>
-          </Routes>
-        </div>
+        <Routes>
+            <Route path={"/Login"} element={<Login/>}/>
+            <Route path={"/Register"} element={<Register/>}/>
+        </Routes>
     );
 };
 
