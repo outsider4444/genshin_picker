@@ -2,46 +2,35 @@ import React, {useEffect, useState} from 'react';
 import styles from './Profile.module.css';
 import ProfileHero from "../Icons/ProfileHero";
 import axios from "axios";
+import {getToken} from "../Jwt/auth";
 
-const Profile = ({token, userInfo, setUserInfo, userCharactersList, setUserCharactersList}) => {
-    const [createUsersHero, setCreateUsersHero] = useState({
-        "userId": 0,
-        "heroId": 0,
-        "level": 0,
-        "consta": 0
-    });
-    const [heroesList, setHeroesList] = useState([]);
-
-
-    useEffect(() => {
-        axios.get('http://localhost:8080/api/v1/heroes')
-            .then(response => {
-                setHeroesList(response.data);
-            })
-            .catch(error => {
-                console.error("Error fetching heroes:", error);
-            });
-    }, []);
-
+const Profile = ({heroesList, token, userInfo, userCharactersList, setUserCharactersList, elements}) => {
     const onClickHero = async (id) => {
-        const character = heroesList.find(c => c.id === id);
-        const userCharacter = userCharactersList.find(c => c.heroId === id);
-        const inArray = userCharactersList.some(c => c.heroId === id);
-
+        const hero = heroesList.find(c => c.id === id);
+        let userCharacter = null;
+        let inArray = null;
+        if (userCharactersList){
+            userCharacter = userCharactersList.find(c => c.hero.id === id);
+            inArray = userCharactersList.some(c => c.hero.id === id);
+        }
         if (inArray) {
             axios.delete(`http://localhost:8080/api/v1/users_hero/${userCharacter.id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             }).then(() => {
-                setUserCharactersList(prevState => prevState.filter(c => c.heroId !== character.id));
+                setUserCharactersList(prevState => prevState.filter(c => c.hero.id !== character.id));
             }).catch(error => {
                 console.error("Error deleting hero:", error);
             });
         } else {
             let newHero = {
-                "userId": userInfo.id,
-                "heroId": character.id,
+                "user": {
+                    "id": userInfo.id
+                },
+                "hero": {
+                    "id": character.id
+                },
                 "level": 0,
                 "consta": 0
             };
@@ -51,19 +40,22 @@ const Profile = ({token, userInfo, setUserInfo, userCharactersList, setUserChara
                     'Authorization': `Bearer ${token}`
                 }
             }).then(response => {
-                const createdHero = response.data;
-                setUserCharactersList(prevState => [...prevState, createdHero]);
+                setUserCharactersList(prevState => [...prevState, response.data]);
             }).catch(error => {
                 console.error("Error adding hero:", error);
             });
         }
     };
-
     const listCharacter = heroesList.map(character => {
-        const isInUserList = userCharactersList.some(c => c.heroId === character.id);
+        let isInUserList = false;
+        if (userCharactersList){
+            isInUserList = userCharactersList.some(c => c.hero.id === character.id);
+        }
+
 
         return (
             <ProfileHero
+                element={elements[character.elementType]}
                 userCharactersList={userCharactersList}
                 setUserCharactersList={setUserCharactersList}
                 id={character.id}
@@ -71,9 +63,9 @@ const Profile = ({token, userInfo, setUserInfo, userCharactersList, setUserChara
                 backgroundColor={!isInUserList ? "grey" : (character.starCount === 4 ? "#836dad" : "#ed7819")}
                 disabled={false}
                 size={140}
+                image={`http://localhost:8080/api/v1/heroes/${character.id}/photo`}
                 heroName={character.name}
                 key={character.id}
-                image={character.photoPath}
                 action={() => onClickHero(character.id)}
             />
         );
@@ -92,7 +84,7 @@ const Profile = ({token, userInfo, setUserInfo, userCharactersList, setUserChara
                         src="https://genshin-info.ru/upload/resize_cache/iblock/9a8/w4vrp5t2uh6px1u2ovpoloa6tsglw7gh/200_200_1d7a58ff99b324185ccb5ad5dfbdb5e85/Klorinda.webp"
                         alt=""
                         style={{
-                            width: "200px",
+                            width: "175px",
                             borderRadius: "50%",
                             border: "5px solid black"
                         }}
@@ -104,7 +96,7 @@ const Profile = ({token, userInfo, setUserInfo, userCharactersList, setUserChara
                 </div>
             </div>
             <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                <div style={{height: "1px", width: "60%", background: "black"}}></div>
+                <div style={{height: "1px", width: "80%", background: "black"}}></div>
             </div>
             <div className={styles.characters}>
                 {listCharacter}

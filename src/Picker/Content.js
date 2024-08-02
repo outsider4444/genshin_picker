@@ -1,17 +1,25 @@
 import React, {useState} from 'react';
 import Icon from "../Icons/Icon";
 
-const Content = ({Pick, ImmunePick, characters1, characters2, immuneCharacters
-                 }) => {
+const Content = ({Pick, ImmunePick, heroes1, heroes2, immuneCharacters, elements, heroesList}) => {
 
-    const listItems1 = characters1.map((character) =>
-        <Icon level={character.level} consta={character.consta} backgroundColor={character.bgColor} disabled={character.disabled} size={100} key={character.id} image={character.image} action={() => Pick(character)}/>
+    const listItems1 = heroesList.map((character) =>
+        <Icon level={character.level} consta={character.consta} backgroundColor={character.bgColor}
+              disabled={character.disabled} size={100} key={character.id} image={character.image}
+              element={elements[character.elementType]}
+              action={() => Pick(character)}/>
     );
-    const listItems2 = characters2.map((character) =>
-        <Icon level={character.level} consta={character.consta} backgroundColor={character.bgColor} disabled={character.disabled} size={100} key={character.id} image={character.image} action={() => Pick(character)}/>
+    const listItems2 = heroesList.map((character) =>
+        <Icon level={character.level} consta={character.consta} backgroundColor={character.bgColor}
+              disabled={character.disabled} size={100} key={character.id} image={character.image}
+              element={elements[character.elementType]}
+              action={() => Pick(character)}/>
     );
     const listImmune = immuneCharacters.map((character) =>
-        <Icon level={character.level} consta={character.consta} backgroundColor={character.bgColor} disabled={character.disabled} size={100} key={character.id} image={character.image} action={() => ImmunePick(character)}/>
+        <Icon level={character.level} consta={character.consta} backgroundColor={character.bgColor}
+              disabled={character.disabled} size={100} key={character.id} image={character.image}
+              element={elements[character.elementType]}
+              action={() => ImmunePick(character)}/>
     );
 
     return (
@@ -24,11 +32,23 @@ const Content = ({Pick, ImmunePick, characters1, characters2, immuneCharacters
                     {listItems2}
                 </div>
             </div>
-            <div style={{textAlign: "center", width: "100%", display: "block", justifyItems: "center", alignItems: "center"}}>
-                    <strong>Беннет</strong> <br/>
-                    <div style={{textAlign: "center", width: "100%", display: "block", justifyItems: "center", alignItems: "center"}}>
-                        {listImmune}
-                    </div>
+            <div style={{
+                textAlign: "center",
+                width: "100%",
+                display: "block",
+                justifyItems: "center",
+                alignItems: "center"
+            }}>
+                <strong>Беннет</strong> <br/>
+                <div style={{
+                    textAlign: "center",
+                    width: "100%",
+                    display: "block",
+                    justifyItems: "center",
+                    alignItems: "center"
+                }}>
+                    {listImmune}
+                </div>
             </div>
         </div>
     );

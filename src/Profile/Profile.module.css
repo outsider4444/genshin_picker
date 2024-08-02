@@ -20,8 +20,10 @@
     background: linear-gradient(90deg, #00CCFF, #4CAF50);
     transform: scale(1.05);
 }
-.characters{
-    margin-left: 25%;
+
+.heroes{
+    margin-left: 9%;
+    margin-right: 5%;
     margin-top: 15px;
     display: flex;
     flex-wrap: wrap;

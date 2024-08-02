@@ -2,10 +2,8 @@ import React, {useState} from 'react';
 import PreIcon from "../Icons/PreIcon";
 import Icon from "../Icons/Icon";
 import Content from "../Picker/Content";
-import axios from "axios";
 
-const Picks = () => {
-
+const Picks = (heroesList, elements) => {
 
     const [charactersList1, setCharactersList1] = useState([
         {
@@ -441,26 +439,25 @@ const Picks = () => {
 
     const listPickedItems1 = pickedCharacters1.map((character) =>
         <Icon consta={character.consta} level={character.level} backgroundColor={character.bgColor} key={character.id}
-              float={"right"} image={character.image}/>
+              float={"right"} image={`http://localhost:8080/api/v1/heroes/${character.id}/photo`}/>
     );
     const listPickedItems2 = pickedCharacters2.map((character) =>
         <Icon consta={character.consta} level={character.level} backgroundColor={character.bgColor} key={character.id}
-              float={"left"} image={character.image}/>
+              float={"left"} image={`http://localhost:8080/api/v1/heroes/${character.id}/photo`}/>
     );
     const listBannedItems1 = bannedCharacters1.map((character) =>
         <Icon level={character.level} consta={character.consta} key={character.id} float={"right"} banned={true}
-              image={character.image}/>
+              image={`http://localhost:8080/api/v1/heroes/${character.id}/photo`}/>
     );
     const listBannedItems2 = bannedCharacters2.map((character) =>
         <Icon level={character.level} consta={character.consta} key={character.id} float={"left"} banned={true}
-              image={character.image}/>
+              image={`http://localhost:8080/api/v1/heroes/${character.id}/photo`}/>
     );
 
     return (
         <div>
-
             <header className="App-header">
-                <div className={"header"}>
+                <div className={"header"} style={{display: "grid", gridTemplateColumns: "45% 10% 45%"}}>
                     <div className={"player player1"}>
                         <div style={{float: "left", textAlign: "left", marginLeft: "45px", marginTop: "15px"}}>
                             Имя 1 <br/>
@@ -504,8 +501,8 @@ const Picks = () => {
                     </div>
                 </div>
             </header>
-            <Content Pick={Pick} ImmunePick={ImmunePick} characters1={charactersList1} characters2={charactersList2}
-                     immuneCharacters={charactersImmuneList}
+            <Content Pick={Pick} ImmunePick={ImmunePick} heroes1={charactersList1} heroes2={charactersList2}
+                     immuneCharacters={charactersImmuneList} elements={elements} heroes={heroesList}
             />
         </div>
     );

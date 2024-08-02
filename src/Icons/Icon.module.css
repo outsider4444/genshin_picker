@@ -20,3 +20,30 @@
 .constIncreaseBtn:hover{
     cursor: pointer;
 }
+
+.heroName{
+    border-radius: 15%;
+    position: absolute;
+    text-align: center;
+    display: grid;
+    align-items: end;
+    background-color: rgb(45 50 90);
+    height: 40px;
+    z-index: -1;
+    font-weight: bold;
+    color: white;
+}
+.changeButton{
+    width: 22px;
+    border-radius: 50%;
+    border: 1px solid white;
+    font-weight: bold;
+    background: grey;
+    z-index:3;
+    margin-top: 2px;
+    margin-right: -10px;
+    float: right;
+}
+.changeButton:hover{
+    cursor: pointer;
+}

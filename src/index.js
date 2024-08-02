@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
-import Auth from "./Auth/Auth";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

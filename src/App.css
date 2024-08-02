@@ -13,7 +13,6 @@
   grid-template-columns: 1fr 0.8fr 1fr;
 }
 .player{
-  width: 850px;
   text-align: left;
 }
 .player1{
